@@ -2,7 +2,10 @@
 <html>
 <body style ="font-family: OCR A Std, monospace;background-image: url(./images/gif_background.gif);background-size: cover;height: 100vh;background-position:center;margin:0;color:white; text-shadow: 2px 2px 4px black, -2px -2px 4px black;">
     #welcome screen
-    <div style="position: absolute;top: 55%;left: 50%; transform: translate(-50%, -50%);margin-top:60px;padding: 17px;border: solid;width: 450px;border-radius: 17px;background-color: rgba(0,0,0,0.4);">
+    <div id="welcome" style="position: absolute;top:55%;left:50%;transform: translate(-50%,-50%);margin-top:60px;padding: 17px;border: solid;width: 450px;border-radius: 17px;background-color: rgba(0,0,0,0.4);">
+        <div id="welcomeheader" style="background-color: rgba(250,128,114,0.4); padding:8px;margin:-17px -17px 15px -17px;border-top-left-radius:14px;border-top-right-radius:14px;cursor:move;text-align:center;font-weight:bold;">
+            Handle window📌 
+        </div>
         <h1 style="padding:4px; margin: 4px;background-color:salmon; color:beige">Welcome to my OS </h1>
            <h2>Introduction</h2>
            <p>Hello people, ready to know more about me?
@@ -24,7 +27,7 @@
                     Hiii it's me !!
                 </p>
             </div>
-            <p><strong>Obiously i couldn't forget music, my favoutite one is <a href="https://www.youtube.com/watch?v=lvBEs8nhmjY">Dancing in the sky by Zita </a></strong></p> 
+            <p><strong>🎵Obiously i couldn't forget music, my favoutite one is <a href="https://www.youtube.com/watch?v=lvBEs8nhmjY">Dancing in the sky by Zita </a></strong></p> 
     </div>
     #top bar
     <div style="position: absolute; top:0; left:0; width: 100%;display:flex;justify-content:space-between;align-items: center;background-color:rgba(250,128,114,0.95);color:#fff;text-shadow: 1px 1px 2px rgba(0,0,0,0.8);height: 45px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3);">
@@ -33,16 +36,12 @@
             <span style=" font-weight:bold;letter-spacing: 1px;">BrunaOS</span>
         </div>
         <p style="margin:0; font-size: 13px; background: rgba(0,0,0,0.1);padding: 4px 12px; border-radius:4px;font-weight:bold;">
-            Status: Online 
+            💻Status: Online 
         </p>
         <p id="timeElement" style="margin-right: 16px;font-weight:bold;">Loading...Time</p>
     </div>
-    #liveClock
-    <script>
-        setInterval(function(){
-            document.querySelector("#timeElement").innerHTML = new Date().toLocaleString();
-        },1000);
-    </script>
+    #liveclock
+    <script src="./script.js"></script>
 </body>
 
 
