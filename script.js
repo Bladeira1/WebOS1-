@@ -57,8 +57,20 @@ function dragElement(element) {
 //closing and oppening welcome page
 var welcomeScreen=document.querySelector("#welcome")
 function closeWindow(element){
-    element.style.dysplay="none"
+    element.style.display="none"
 }
 function openWindow(element){
-    element.style.display="flex"
+    element.style.display="block"
 }
+//identify buttoms
+var welcomeScreenClose=document.querySelector("#welcomeclose")
+var welcomeScreenOpen=document.querySelector("#welcomeopen")
+//waits for the action/button to be pressed to run a function that executes the action
+welcomeScreenClose.addEventListener("click",
+    function(){
+        closeWindow(welcomeScreen);
+    });
+    welcomeScreenOpen.addEventListener("click",
+        function(){
+            openWindow(welcomeScreen);
+        });
