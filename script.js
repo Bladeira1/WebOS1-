@@ -23,10 +23,10 @@ function dragElement(element) {
         initialY=e.clientY;
         //mouse movement and bottom release
         document.onmouseup=stopDragging;
-        document.onmousemove=dragElement;
+        document.onmousemove=elementDrag;
     }
     //know were we draged the window so were it last position is
-    function dragElement(e){
+    function elementDrag(e){
         e=e || window.event;
         e.preventDefault();
         currentX=initialX-e.clientX;
