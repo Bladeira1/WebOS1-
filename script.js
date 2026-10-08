@@ -33,12 +33,32 @@ function dragElement(element) {
         currentY=initialY-e.clientY;
         initialX=e.clientX;
         initialY=e.clientY;
-        element.style.top=(element.offsetTop-currentY) + "px";
-        element.style.left=(element.offsetLeft-currentX) + "px";
+        var Top=element.offsetTop-currentY;
+        var Left=element.offsetLeft-currentX;
+        if(Top<45){
+            Top=45;
+        }
+        var limit=window.innerHeight-100;
+        if (Top > limit){
+            Top=limit;
+        }
+        var limitRight=window.innerWidth-100;
+        if (Left<-350){Left=-350;}
+        if(Left>limitRight){Left=limitRight;}
+        element.style.top=Top+"px";
+        element.style.left=Left+"px";
     }
     //stop tracking the movement
     function stopDragging(){
         document.onmouseup=null;
         document.onmousemove=null;
     }
+}
+//closing and oppening welcome page
+var welcomeScreen=document.querySelector("#welcome")
+function closeWindow(element){
+    element.style.dysplay="none"
+}
+function openWindow(element){
+    element.style.display="flex"
 }
