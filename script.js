@@ -74,3 +74,55 @@ welcomeScreenClose.addEventListener("click",
         function(){
             openWindow(welcomeScreen);
         });
+
+//app 
+var selectedIcon=undefined
+function selectIcon(element){
+    element.classList.add("selected");
+    selectedIcon=element
+}
+function deselectIcon(element){
+    element.classList.remove("selected");
+    selectedIcon=undefined
+}
+function handleIconTap(element){
+    if(element.classList.contains("selected")){
+        deselectIcon(element);
+        var windowrobotics=document.getElementById("robotics");
+        if(windowrobotics){
+            openWindow(windowrobotics)
+        }
+    }else{
+        selectIcon(element)
+    }
+}
+//drag app
+dragElement(document.querySelector("#robotics"))
+//close app
+var roboticsScreen=document.querySelector("#robotics")
+var roboticsScreenClose=document.querySelector("#roboticsclose")
+roboticsScreenClose.addEventListener("click",function(){
+    closeWindow(roboticsScreen);
+});
+//make the app window pop in form of the welcome window
+var biggestIndex=1;
+function addWindowTapHandling(element){
+    element.addEventListener("mousedown", function(){
+        handleWindowTap(element)
+    })
+}
+addWindowTapHandling(document.querySelector("#welcome"));
+addWindowTapHandling(document.querySelector("#robotics"));
+var topBar=document.querySelector("#top");
+function openWindow(element){
+    element.style.display="block";
+    biggestIndex++;
+    element.style.zIndex=biggestIndex;
+    topBar.style.zIndex=biggestIndex+1;
+}
+function handleWindowTap(element){
+    biggestIndex++;
+    element.style.zIndex=biggestIndex;
+    topBar.style.zIndex=biggestIndex+1;
+    deselectIcon(selectedIcon)
+}
