@@ -131,11 +131,38 @@ var roboticsContentData=[
         title:"Welcome",
         date:"09/10/2026",
         content:`
-            <p style="margin-top:0;">Welcome to <strong>Bruna's Tech Lab</strong></p>
+            <p style="margin-top:0;">🏠Welcome to <strong>Bruna's Tech Lab</strong></p>
             <p>This is my journal, where I document and talk about my dream projects</p>
             <p style="font-size:12px;color:rgba(255,255,255,0.6);">Last updated 09/10/2026</p>
         `
     },
+    {
+        title:"Project 1",
+        date:"Thinking about doing it soon",
+        content:`
+            <p style="margin:0;font-weight:bold;color:salmon;font-size:18px;">✈️Controlable airplane</p>
+            <p><strong>The concept:</strong>An airplane relies on balancing aerodynamics, structure, and electronics so the aircraft can generate lift, manage stability, and respond to pilot commands from the ground.</p>
+            <p><strong>Goal:</strong>The goal of this project is to design, build a scratch-made controllable that can take off, perform stable maneuvers, and land safely, as well as the construction part which I find it really interesting.So I want to successfully fly a custom controlled aircraft cause I always loved building things and combining that whit my passion for airplanes will be awesome.</p>
+        `
+    },
+    {
+        title:"Project 2",
+        date:"Future goal project",
+        content:`
+            <p style="margin-top:0;font-weight:bold;color:salmon;font-size:18px;">🚀Rocket</p>
+            <p><strong>The concept:</strong>Building a controllable rocket relies on managing aerodynamics, propulsion and stability to pierce the atmosphere vertically and safely make it return to earth completly intact</p>
+            <p><strong>Goal:</strong>The goal of this project is to design, simulate, and lauch a high-performance rocket that achives a predictable vertical trajectory and safe recovery. I also want to challenge myself whit this project because od the advanced flight-tracking vehicle capable of collecting and analyzing live atmopheric data that I have to build.</p>
+        `
+    },
+    {
+        title:"Project 3",
+        date:"DREAM Future end goal project (The most challenging and dificult)",
+        content:`
+            <p style="margin-top:0;font-weight:bold;color:salmon;font-size:18px;">🤖Personal walking Robot (Mini assistent)</p>
+            <p><strong>The concept:</strong>Building a personal walking robot but that combines legged locomotion kinematics, spacial computer vison, and conversional Artificial Intelligence to create a highly adaptable, likelife homeassistant.</p>
+            <p><strong>Goal:</strong>The goal of this project is to build my dream robot using advanced engineering, complex dynamic balanceto create a robot that walks naturaly on legs, allowing it to nevigate my home but also whit a fluid human interaction and physical household utility. And also most of all to build a talking robotic friend.</p>
+        `   
+    }
 ];
 function setRoboticsContent(index){
     var contentContainer=document.querySelector("#roboticsContent");
