@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-#css file to html link
+<!--css file to html link-->
 <head>
     <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body style ="font-family: OCR A Std, monospace;background-image: url(./images/gif_background.gif);background-size: cover;height: 100vh;background-position:center;margin:0;color:white; text-shadow: 2px 2px 4px black, -2px -2px 4px black;background-repeat: no-repeat; background-attachment:fixed; overflow:hidden;">
-    #welcome screen
+    <!--welcome screen-->
     <div id="welcome" class="window" >
         <div class="windowheader" id="welcomeheader">
             <span class="closebutton" id="welcomeclose">❌</span>
@@ -34,20 +34,27 @@
             </div>
             <p><strong>🎵Obiously i couldn't forget music, my favoutite one is <a href="https://www.youtube.com/watch?v=lvBEs8nhmjY">Dancing in the sky by Zita </a></strong></p> 
     </div>
-    #inside the app, robotics screen 
+    <!--inside the app, robotics screen--> 
     <div id="robotics" class="window" style="top:220px;left:15%;display:none;">
         <div class="windowheader" id="roboticsheader">
             <span class="closebutton" id="roboticsclose">❌</span>
             <span>Tech Lab🤖</span>
         </div>
-        <div style="background-color:rgba(0,0,0,0.3);margin:6px;border-radius:12px;padding:16px;width:420px;height:300px;box-sizing:border-box;">
-            <h1 style="padding:4px;margin:4px;background-color:#4a90e2;color:beige;font-size:22px; text-align:center;">Robotics Studio</h1>
-            <h2>My Roadmap</h2>
-            <p>Probably building something right now </p>
-        </div>"
+        <div style="background-color:rgba(0,0,0,0.4);margin:6px;border-radius:12px;padding:16px;height:420px;box-sizing:border-box;display:flex;gap:10px;overflow:hidden;font-family:monospace;">
+            <div style="background:rgba(250,128,144,0.25);padding:6px 12 px;border-top-left-radius:6px;border-top-right-radius:6px;cursor:pointer;font-size:12px;font-weight:bold;border:1px solid rgba(250,128,114,0.4);border-bottom:none;width:fit-content;">
+                🏠 Welcome
+            </div>
+            <div id="roboticsSidebar" style="width:140px;min-width:140px;display:flex;flex-direction:column;gap:8px;border-right:1px solid rgba(250,128,114,0.3);padding-right:8px;overflow-y:auto;">
+
+            </div>
+            <div id="roboticsContent" style="padding:16px 0;overflow-y:auto;flex-grow:1; font-size:14px; line-height: 1.5;">
+                <p style="margin-top:0;">Welcome to Bruna's Tech Lab</p>
+                <p>This is my panel, where I document my dream projets</p>
+            </div>
+        </div>
 
     </div>
-    #top bar
+    <!--#top bar-->
     <div id="top" style="position: absolute; top:0; left:0; width: 100%;display:flex;justify-content:space-between;align-items: center;background-color:rgba(250,128,114,0.95);color:#fff;text-shadow: 1px 1px 2px rgba(0,0,0,0.8);height: 45px; box-shadow: 0px 4px 10px rgba(0,0,0,0.3);">
         <div style="display: flex; align-items:center;margin-left: 16px; gap:8px;">
             <img src="./images/my_cat.png" style="width: 20 px; height: 20px;">
@@ -59,7 +66,7 @@
         </p>
         <p id="timeElement" style="margin-right: 16px;font-weight:bold;">Loading...Time</p>
     </div>
-    #app
+    <!--#app-->
     <div id="desktopApps" style="padding-top:64px; padding-left:16px;">
         <div onclick="handleIconTap(this)" style="text-align:center;padding:12px;width:fit-content;border:2px solid rgba(255,255,255,0.2);border-radius:12px;background: rgba(0,0,0,0.2); backdrop-filter:blur(2px);">
             <img src="./images/app_icon.png" style="width:64px;height:64px;font-size:45px;display:block;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.8));">
@@ -68,7 +75,7 @@
         </div>
     </div>
 
-    #every thing that inside scripts
+    <!--every thing that inside scripts-->
     <script src="./script.js"></script>
      
 </body>

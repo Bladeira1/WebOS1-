@@ -126,3 +126,51 @@ function handleWindowTap(element){
     topBar.style.zIndex=biggestIndex+1;
     deselectIcon(selectedIcon)
 }
+var roboticsContentData=[
+    {
+        title:"Welcome",
+        date:"09/10/2026",
+        content:`
+            <p style="margin-top:0;">Welcome to <strong>Bruna's Tech Lab</strong></p>
+            <p>This is my journal, where I document and talk about my dream projects</p>
+            <p style="font-size:12px;color:rgba(255,255,255,0.6);">Last updated 09/10/2026</p>
+        `
+    },
+];
+function setRoboticsContent(index){
+    var contentContainer=document.querySelector("#roboticsContent");
+    if (contentContainer){
+        contentContainer.innerHTML=roboticsContentData[index].content;
+    }
+}
+function handleIconTap(element){
+    if (element.classList.contains("selected")){
+        deselectIcon(element);
+        var windowrobotics=document.getElementById("robotics");
+        if(windowrobotics){
+            setRoboticsContent(0);
+            openWindow(windowrobotics);
+        }
+    }else{
+        if(selectedIcon) deselectIcon(selectedIcon);
+        selectIcon(element);
+    }
+}
+//functional lateral sidebar
+function addToSiBar(index){
+    var sidebar=document.querySelector("#roboticsSidebar");
+    var robotics=roboticsContentData[index];
+    if(!sidebar)return;
+    var newDiv=document.createElement("div");
+    newDiv.innerHTML=`
+        <p style="margin:0px;font-weight:bold;">${robotics.title}</p>
+        <p style="font-size:12px;margin:0px;color:rgba(255,255,255,0.6);">${robotics.date}</p>
+        `;
+    newDiv.addEventListener("click",function(){
+        setRoboticsContent(index);
+    });
+    sidebar.appendChild(newDiv);
+}
+for (let i=0;i<roboticsContentData.length;i++){
+    addToSiBar(i); 
+}
