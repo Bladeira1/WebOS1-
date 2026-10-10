@@ -81,10 +81,10 @@
 }
 #adventureApp{
     width:880px!important;
-    height:540px!important;
+    height:600px!important;
     background-color:rgba(20,20,30,0.9);
-    top:120px;
-    left:20%;
+    top:90px;
+    left:15%;
     overflow:hidden!important;
 }
 #adventureContent{

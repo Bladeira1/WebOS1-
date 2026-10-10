@@ -237,7 +237,12 @@ var adventureContentData={
             {title:"How it started", text:"I discovered fencing 2 years ago because I love sports and wanted to do more so I taught to myself why not choose a unique sport. I am glad I chose fencing cause I fell in love whit it."},
             {title:"The Discipline",text:"Fencing taught me that every small movement counts and it requires dedication, obiously I won't master fencing techniques in one day, it's whit time that I will be able to do it."}
         ],
-        wheelResults:"<h3>Your Next Move: Fencing🤺</h3><p>Be ready to expirience the thrill of a fencing dueland learn more about it.Let's expand fencing knowledge.</p>"
+        wheelResults:"<h3>Your Next Move: Fencing🤺</h3><p>Be ready to expirience the thrill of a fencing duel and learn more about it.Let's expand fencing knowledge.</p>",
+        roadmap:[
+            {step: "01", icon: "✈️", title: "Global Competitions & Travel", desc: "Fencing opens doors to travel the world. You'll journey to amazing cities for international tournaments, experiencing new cultures and testing your skills against elite global athletes."},
+            {step: "02", icon: "🧠", title: "Tactical Competitiveness", desc: "It builds a fierce competitive spirit. Fencing is a game of high-speed physical chess where you learn to analyze your opponent, strategize, and execute split-second tactical decisions under pressure."},
+            {step: "03", icon: "🌱", title: "Personal Growth & Discipline", desc: "The ultimate reward is your evolution. This sport builds unmatched discipline, shapes your character, and teaches you how to conquer your fears and grow stronger with every single bout."}
+        ]
     }, 
     climbing:{
         title:"Climbing🧗‍♀️",
@@ -252,7 +257,14 @@ var adventureContentData={
             {title:"Pure Focus", text:"When I am climbing I fell like I am in my own space. It's just me, the wall and the end of the boulder while trying to solve the puzzle of how to make the next move."},
             {title:"Challenging", text:"Climbing pushed me out of my comfort zone. It taught me to trust my body and my capycity to adapt."}
         ],
-    }
+        wheelResults:"<h3>Your Next Move: Climbing🧗‍♀️</h3><p>Get ready to defy gravity by learning the climbing life.</p>",
+        roadmap:[
+            {step: "01", icon: "⛰️", title: "Expedition Trips & Nature", desc: "Climbing takes you on incredible journeys into nature. You'll travel to beautiful outdoor crags, conquer majestic natural rock formations, and explore breathtaking landscapes."},
+            {step: "02", icon: "🧗‍♀️", title: "Mind & Body Mastery", desc: "It's the perfect balance of raw physical power and absolute mental focus. You challenge your body to adapt to complex vertical grips while solving intricate physical puzzles hold by hold."},
+            {step: "03", icon: "🤝", title: "The Family Community", desc: "Climbing is not just a sport, it's a lifestyle built on community. You enter a welcoming environment where everyone helps, cheers, and pushes each other forward like a real second family."}
+        ]
+    },
+
 };
 var currentSelectedSport="fencing";
 var currentPostIndex=0;
@@ -294,8 +306,8 @@ function showAdventureWelcomePage(){
         <div style="display:flex;gap:12px;margin-bottom:12px;">
             <!--fencing-->
             <div onclick="openSportSelection('fencing')" style="flex:1;background:rgba(30,41,59,0.3);border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,0.05);transition:transform 0.2s;">
-                <img src="./images/fencing.webp" style="width:100%;height:120px;object-fit:cover;object-position:center;display:block;onerror="this.src='./images/myfoto.PNG'">
-                <div style="padding:8px;background:rgba(15,23,42,0.6);font-size:11px;font-weight:bold;">01 / Fencing</div>
+                <img src="./images/fencing.webp" style="width:100%;height:160px;object-fit:cover;object-position:center;display:block;" onerror="this.src='./images/myfoto.PNG'">
+                <div style="padding:12px;background:rgba(15,23,42,0.6);font-size:11px;font-weight:bold;">01 / Fencing</div>
             </div>
             <!--climbing-->
             <div onclick="openSportSelection('climbing')" style="flex:1;background:rgba(30,41,59,0.3);border-radius:12px;overflow:hidden;cursor:pointer;border: 1px solid rgba(255,255,255,0.05);transition:transform 0.2s;">
@@ -464,7 +476,7 @@ function spinTheWheel(){
     currentWheelRotation+=1800+extraDegrees;
     wheel.style.transform=`rotate(${currentWheelRotation}deg)`;
     var normalizeAngle=(currentWheelRotation%360);
-    var winningSport="fencing";
+    var winningSport="climbing";
     if(normalizeAngle>=90 && normalizeAngle<270){
         winningSport="climbing";
     }else{
@@ -472,15 +484,15 @@ function spinTheWheel(){
     }
     setTimeout(function(){
         resultCard.style.display="block";
-        textSlot.innerHTML`<p style="margin:0;font-weight:bold;color:#00ff96;">The wheel stoped!! Your sport is waiting for you...</p>`;
+        var selectedData=adventureContentData[winningSport];
+        textSlot.innerHTML=selectedData.wheelResults || selectedData.wheelResults;
         actionBtn.onclick=function(){
-            var selectedData=adventureContentData[winningSport];
-            textSlot.innerHTML=selectedData.wheelResults || selectedData.wheelResults;
+            loadAdventureRoadmap(winningSport);
         };
     },3000);
 }
-function openGloalWheelSelection(){
-    var sidebar=document.querySelector("#adventureDidebar");
+function openGlobalWheelSection(){
+    var sidebar=document.querySelector("#adventureSidebar");
     var contentArea=document.querySelector("#adventureContent");
     if(!contentArea)return;
     if(sidebar)sidebar.style.display="none";
@@ -506,6 +518,45 @@ function openGloalWheelSelection(){
                 ⬅ Back to Menu
             </button>
         </div>
-    </div>
     `;
+}
+function loadAdventureRoadmap(sportKey){
+    var sidebar=document.querySelector("#adventureSidebar");
+    var contentArea=document.querySelector("#adventureContent");
+    var sportData=adventureContentData[sportKey];
+    if(!contentArea || !sportData) return;
+    if(sidebar)sidebar.style.display="none";
+    var roadmapHTML=`
+        <h2 style="margin-top:0; color:salmon; font-size:20px;">🗺️ ${sportData.title} - Future Roadmap</h2>
+        <p style="color:#94a3b8; font-size:13px; margin-bottom:25px;">Discover what you will experience and achieve through this incredible sport journey.</p>
+        <div style="position: relative; display: flex; flex-direction: column; gap: 20px; padding-left: 20px; box-sizing: border-box;">
+            <div style="position: absolute; left: 6px; top: 15px; bottom: 15px; width: 2px; background: linear-gradient(180deg, salmon, #00ff96); opacity: 0.3; z-index: 1;"></div>
+    `;
+    sportData.roadmap.forEach(function(item){
+        roadmapHTML+=`
+            <div style="position:relative;display:flex;gap:15px;z-index:2;">
+            <div style="width:14px;height:14px;border-radius:50%;background:#1e293b;border:3px solid salmon;position:absolute;left:-20%;top:18px;box-shadow:0 0 8px salmon;"></div>
+            <div style="background:rgba(255,255,255,0.04);backdrop-filter:blur(80s);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;flex-grow:1;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+                    <span style="font-size:11px;font-weight:bold;background:rgba(250,128,114,0.2);color:salmon;padding:2px 6px;border-radius:4px;">Step${item.step}</span>
+                    <span style="font-size:16px;">${item.icon}</span>
+                    <h4 style="margin:0;font-size:14px;font-weight:bold;color:#fff;">${item.title}</h4>
+                </div>
+                <p style="margin:0;color:#cbd5e1; font-size:12px;line-height:1.5;">${item.desc}</p>
+                <div style="margin-top:12px;border-radius:8px;overflow:hidden;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);height:180px;display:flex;align-items:center;justify-content:center;">
+                    <img src="./images/${sportKey}_step${item.step}.PNG" style="max-width:100%;max-height:180px;object-fit:contain;display:block;" onerror="this.src='./images/myfoto.PNG'">
+                </div>
+            </div>
+        </div>
+        `;
+    });
+    roadmapHTML+=`
+        </div>
+        <div style="margin-top:25px;text-align:center;">
+            <button onclick="openGlobalWheelSection()" style="background:rgba(255,255,255,0.08);color:#38bdf8;border:1px solid rgba(255,255,255,0.05);padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;font-size:12px;transition:0.2;">
+                ⬅ Return to Lucky Wheel
+            </button>
+        </div>
+    `;
+    contentArea.innerHTML=roadmapHTML;
 }
