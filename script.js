@@ -234,8 +234,8 @@ var adventureContentData={
             {name:"Mental focus and tactical anticipation",progress:64},
         ],
         aboutPosts:[
-            {title:"How it started", text:"I discovered fencing 2 years ago because I love sports and wanted to do more so I taught to myself why not choose a unique sport. I am glad I chose fencing cause I fell in love whit it."},
-            {title:"The Discipline",text:"Fencing taught me that every small movement counts and it requires dedication, obiously I won't master fencing techniques in one day, it's whit time that I will be able to do it."}
+            {title:"How it started", text:"I discovered fencing 2 years ago because I love sports and wanted to do more so I taught to myself why not choose a unique sport. I am glad I chose fencing cause I fell in love whit it.",image:"fencing_card1.jpg"},
+            {title:"The Discipline",text:"Fencing taught me that every small movement counts and it requires dedication, obiously I won't master fencing techniques in one day, it's whit time that I will be able to do it.",image:"fencing_card2.jpg"}
         ],
         wheelResults:"<h3>Your Next Move: Fencing🤺</h3><p>Be ready to expirience the thrill of a fencing duel and learn more about it.Let's expand fencing knowledge.</p>",
         roadmap:[
@@ -254,8 +254,8 @@ var adventureContentData={
             {name:"Gain more core and strenght endurance",progress:68}
         ],
         aboutPosts:[
-            {title:"Pure Focus", text:"When I am climbing I fell like I am in my own space. It's just me, the wall and the end of the boulder while trying to solve the puzzle of how to make the next move."},
-            {title:"Challenging", text:"Climbing pushed me out of my comfort zone. It taught me to trust my body and my capycity to adapt."}
+            {title:"Pure Focus", text:"When I am climbing I fell like I am in my own space. It's just me, the wall and the end of the boulder while trying to solve the puzzle of how to make the next move.",image:"climbing_card1.avif"},
+            {title:"Challenging", text:"Climbing pushed me out of my comfort zone. It taught me to trust my body and my capycity to adapt.",image:"climbing_card2.jpg"}
         ],
         wheelResults:"<h3>Your Next Move: Climbing🧗‍♀️</h3><p>Get ready to defy gravity by learning the climbing life.</p>",
         roadmap:[
@@ -398,8 +398,9 @@ function loadSubSelection(selectionKey){
                     <h3 style="margin:8px 0;font-size:18px;color:#fff;">${currentPost.title}</h3>
                     <p style="margin:0;color:#cbd5e1;font-size:13px;line-height:1.6;">${currentPost.text}</p>
                 </div>
-                <div style="margin-top:15px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.05);">
-                    <img src="./images/${currentSelectedSport}.jpg" style="width: 100%; height: 140px; object-fit: cover;" onerror="this.src='./images/myfoto.PNG'">
+                <div style="margin-top:15px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);height:190px;background:#000000!important;display:flex;align-items:center;justify-content:center;position:relative;isolation:isolate;transform:translateZ(0);z-index:10;">
+                    <img src="./images/${currentPost.image}" style="position: absolute; width: 120%; height: 120%; object-fit: cover; filter: blur(15px); opacity: 0.25; z-index: 1;" onerror="this.src='./images/myfoto.PNG'">
+                    <img src="./images/${currentPost.image}" style="max-width: 100%;max-height: 190px; object-fit: contain;display:block;position:relative;z-inex:2;filter:none!important;opacity:1;background:#000;" onerror="this.src='./images/myfoto.PNG'">
                 </div>
             </div>
             <div style="display: flex; gap: 12px; justify-content: flex-end;">
@@ -464,24 +465,20 @@ function exploreMyWorldIntro(){
         </div>
     `;
 }
+var isSpinning=false;
 var currentWheelRotation=0;
 function spinTheWheel(){
+    if(isSpinning)return;
     var wheel=document.getElementById("luckyWheel");
     var resultCard=document.getElementById("wheelResultCard");
     var textSlot=document.getElementById("wheelTextSlot");
     var actionBtn=document.getElementById("findAdventureBtn");
     if (!wheel || !resultCard || !textSlot || !actionBtn) return;
     resultCard.style.display="none";
-    var extraDegrees=Math.floor(Math.random()*360);
-    currentWheelRotation+=1800+extraDegrees;
+    var winningSport=Math.random()<0.5? "fencing" : "climbing";
+    var targetAngle=(winningSport==="fencing")? 270 : 90;
+    currentWheelRotation+=1800+targetAngle;
     wheel.style.transform=`rotate(${currentWheelRotation}deg)`;
-    var normalizeAngle=(currentWheelRotation%360);
-    var winningSport="climbing";
-    if(normalizeAngle>=90 && normalizeAngle<270){
-        winningSport="climbing";
-    }else{
-        winningSport="fencing";
-    }
     setTimeout(function(){
         resultCard.style.display="block";
         var selectedData=adventureContentData[winningSport];
@@ -489,6 +486,7 @@ function spinTheWheel(){
         actionBtn.onclick=function(){
             loadAdventureRoadmap(winningSport);
         };
+        isSpinning=false;
     },3000);
 }
 function openGlobalWheelSection(){
@@ -532,24 +530,37 @@ function loadAdventureRoadmap(sportKey){
         <div style="position: relative; display: flex; flex-direction: column; gap: 20px; padding-left: 20px; box-sizing: border-box;">
             <div style="position: absolute; left: 6px; top: 15px; bottom: 15px; width: 2px; background: linear-gradient(180deg, salmon, #00ff96); opacity: 0.3; z-index: 1;"></div>
     `;
-    sportData.roadmap.forEach(function(item){
+    for(let i=0;i<sportData.roadmap.length;i++){
+        var item=sportData.roadmap[i];
+        var isInverted=(i===1);
+        var flexDirection=isInverted?"row-reverse":"row";
+        var arrowIcon=isInverted?"⬅️" : "➔";
         roadmapHTML+=`
-            <div style="position:relative;display:flex;gap:15px;z-index:2;">
-            <div style="width:14px;height:14px;border-radius:50%;background:#1e293b;border:3px solid salmon;position:absolute;left:-20%;top:18px;box-shadow:0 0 8px salmon;"></div>
-            <div style="background:rgba(255,255,255,0.04);backdrop-filter:blur(80s);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;flex-grow:1;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-                    <span style="font-size:11px;font-weight:bold;background:rgba(250,128,114,0.2);color:salmon;padding:2px 6px;border-radius:4px;">Step${item.step}</span>
-                    <span style="font-size:16px;">${item.icon}</span>
-                    <h4 style="margin:0;font-size:14px;font-weight:bold;color:#fff;">${item.title}</h4>
-                </div>
-                <p style="margin:0;color:#cbd5e1; font-size:12px;line-height:1.5;">${item.desc}</p>
-                <div style="margin-top:12px;border-radius:8px;overflow:hidden;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.05);height:180px;display:flex;align-items:center;justify-content:center;">
-                    <img src="./images/${sportKey}_step${item.step}.PNG" style="max-width:100%;max-height:180px;object-fit:contain;display:block;" onerror="this.src='./images/myfoto.PNG'">
+            <div style="position: relative; display: flex; gap: 15px; z-index: 2; margin-bottom: 25px;">
+                <div style="width: 14px; height: 14px; border-radius: 50%; background: #1e293b; border: 3px solid salmon; position: absolute; left: -20px; top: 35px; box-shadow: 0 0 8px salmon;"></div>
+                <div style="display:flex;flex-direction:${flexDirection};gap:20px;width:100%;box-sizing:border-box;align-items:center;">
+                    <div style="flex: 1; background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                            <span style="font-size:10px;font-weight:bold;background:rgba(250,128,114,0.2);color:salmon;padding:2px 6px;border-radius:4px;">Step ${item.step}</span>
+                            <span style="font-size:16px;">${item.icon}</span>
+                            <h4 style="margin: 0; font-size: 14px; font-weight: bold; color: #fff;">${item.title}</h4>
+                        </div>
+                        <p style="margin: 0; color: #cbd5e1; font-size: 12px; line-height: 1.5;">${item.desc}</p>
+                    </div>
+                    <div style="font-size: 18px; color: salmon; text-shadow: none; opacity: 0.7; user-select: none;">
+                        ${arrowIcon}
+                    </div>
+                    <div style="flex: 1; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); height: 190px; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;position:relative;">
+                        <img src="./images/${sportKey}_step${item.step}.PNG" style="position:absolute;width:160%;height:160%;object-fit:cover;filter:blur(12px);opacity:0.5;z-index:1;" onerror="this.src='./images/myfoto.PNG'">
+                        <img src="./images/${sportKey}_step${item.step}.PNG" style="max-width: 100%; max-height: 190px; object-fit: contain; display: block; position: relative; z-index: 2;" onerror="this.src='./images/myfoto.PNG'">
+                    </div>
+
                 </div>
             </div>
-        </div>
         `;
-    });
+
+    }
+        
     roadmapHTML+=`
         </div>
         <div style="margin-top:25px;text-align:center;">
