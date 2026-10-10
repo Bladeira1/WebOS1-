@@ -222,3 +222,77 @@ if (sidebarContainer){
         addToSiBar(i);
     } 
 }
+//my advanced app 
+var adventureContentData={
+    fencing:{
+        title:"fencing🤺",
+        bannerText:"Two passions. New challenges. One journey",
+        goals:[
+            {name:"Improving footwork speed", progress:53},
+            {name:"Improving explosiveness",progress:27},
+            {name:"Competing internationaly",progress: 0},
+            {name:"Mental focus and tactical anticipation",progress:64},
+        ],
+        aboutPosts:[
+            {title:"How it started", text:"I discovered fencing 2 years ago because I love sports and wanted to do more so I taught to myself why not choose a unique sport. I am glad I chose fencing cause I fell in love whit it."},
+            {title:"The Discipline",text:"Fencing taught me that every small movement counts and it requires dedication, obiously I won't master fencing techniques in one day, it's whit time that I will be able to do it."}
+        ],
+        wheelResults:"<h3>Your Next Move: Fencing🤺</h3><p>Be ready to expirience the thrill of a fencing dueland learn more about it.Let's expand fencing knowledge.</p>"
+    }, 
+    climbing:{
+        title:"Climbing🧗‍♀️",
+        bannerText:"Two passions. New challenges. One journey.",
+        goals:[
+            {name:"Completing my first V5 boulder route",progress:70},
+            {name:"Enhacing,develop finger strenght",progress:40},
+            {name:"Overcomming the fear of dynamic commits",progress:35},
+            {name:"Gain more core and strenght endurance",progress:68}
+        ],
+        aboutPosts:[
+            {title:"Pure Focus", text:"When I am climbing I fell like I am in my own space. It's just me, the wall and the end of the boulder while trying to solve the puzzle of how to make the next move."},
+            {title:"Challenging", text:"Climbing pushed me out of my comfort zone. It taught me to trust my body and my capycity to adapt."}
+        ],
+    }
+};
+var currentSelectedSport="fencing";
+var currentPostIndex=0;
+//buttons
+var adventureAppWindow=document.querySelector("#adventureApp");
+var adventureCloseBtn=document.querySelector("#adventureClose");
+if (adventureCloseBtn){
+    adventureCloseBtn.addEventListener("click",function(){
+        if(adventureAppWindow) adventureAppWindow.style.display="none";
+    });
+}
+function handleAdventureIconTap(element){
+    if(element.classList.contains("selected")){
+        deselectIcon(element);
+        if(adventureAppWindow){
+            openWindow(adventureAppWindow);
+            showAdventureWelcomePage();
+        }
+    }else{
+        if(selectedIcon) deselectIcon(selectedIcon);
+        selectIcon(element);
+    }
+}
+function showAdventureWelcomePage(){
+    var contentArea=document.querySelector("#adventureContent");
+    if(!contentArea)return;
+    var sidebar=document.querySelector("#adventureSidebar");
+    if(sidebar) sidebar.style.display="none";
+    contentArea.innerHTML= `
+        //topbanner
+        <div style="background:rgba(30,41,59,0.5);padding:20px;border-radius:12px;margin-bottom:20px;border:1px solid rgba(255,255,255,0.05);">
+            <span style="font-size:11px;text-transform:uppercase;color:#38bdf8:font-weight:bold;letter-spacing:1px;">Welcome to my world</span>
+            <h1 style="margin:8px 0;font-size:22px;font-weight:bold;color:#fff;">Every journey starts somewhere.</h1>
+            <p style="margin:0 0 16px 0;color:#94a3b8; font.size:13px;">Two passions. New challenges. One journey.</p>
+            <button onclick="openSportSelection('fencing)" style="background:#0284c7;color:white;border:none;padding:8px 16px;border-radius:4px;font-weight:bold;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:6px;">Explore my world</button>
+        </div>
+        //chose between the fencing or climbing buttom
+        <h3 style="margin-bottom:12px;fint-size:14px; font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;">Choose your path</h3>
+        <div style="display:flex;gap:16px">
+            
+        </div>
+    `;    
+}
