@@ -40,3 +40,42 @@
     transition:all 0.2s ease;
     cursor:pointer;
 }
+#robotics{
+    width:750px !important;
+    height:520px !important;
+    background-color:rgba(20,20,30,0.9);
+    top:120px;
+    left:25%;
+}
+.sidebar-tab{
+    background:rgba(250,128,114,0.1);
+    padding:10px;
+    border-radius:8px;
+    cursor:pointer;
+    border:1px solid rgba(250,128,114,0.2);
+    transition:all 0.2s ease-in-out;
+}
+.sidebar-tab.active-tab{
+    background:rgba(250,128,114,0.4);
+    border-color:rgba(250,128,114,0.9);
+    box-shadow:0 0 8px rgba(250,128,114,0.4);
+}
+.project-card{
+    background:rgba(255,255,255,0.05);
+    border-left:4px solid salmon;
+    padding:12px;
+    margin:12px 0;
+    border-radius:4px;
+}
+.goal-card{
+    background:rgba(0,255,150,0.05);
+    border-left:4px solid#00ff96;
+    padding:12px;
+    margin:12px 0;
+    border-radius:4px;
+}
+.sidebar-tab:hover{
+    background:rgba(250,128,114,0.25);
+    border-color:rgba(250,128,114,0.6);
+    transform:scale(1.02);
+}
