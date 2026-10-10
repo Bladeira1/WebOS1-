@@ -258,7 +258,7 @@ var currentSelectedSport="fencing";
 var currentPostIndex=0;
 //buttons
 var adventureAppWindow=document.querySelector("#adventureApp");
-var adventureCloseBtn=document.querySelector("#adventureClose");
+var adventureCloseBtn=document.querySelector("#adventureclose");
 if (adventureCloseBtn){
     adventureCloseBtn.addEventListener("click",function(){
         if(adventureAppWindow) adventureAppWindow.style.display="none";
@@ -282,17 +282,230 @@ function showAdventureWelcomePage(){
     var sidebar=document.querySelector("#adventureSidebar");
     if(sidebar) sidebar.style.display="none";
     contentArea.innerHTML= `
-        //topbanner
-        <div style="background:rgba(30,41,59,0.5);padding:20px;border-radius:12px;margin-bottom:20px;border:1px solid rgba(255,255,255,0.05);">
-            <span style="font-size:11px;text-transform:uppercase;color:#38bdf8:font-weight:bold;letter-spacing:1px;">Welcome to my world</span>
-            <h1 style="margin:8px 0;font-size:22px;font-weight:bold;color:#fff;">Every journey starts somewhere.</h1>
-            <p style="margin:0 0 16px 0;color:#94a3b8; font.size:13px;">Two passions. New challenges. One journey.</p>
-            <button onclick="openSportSelection('fencing)" style="background:#0284c7;color:white;border:none;padding:8px 16px;border-radius:4px;font-weight:bold;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:6px;">Explore my world</button>
+        <!--topbanner-->
+        <div style="background:rgba(30,41,59,0.5);padding:12px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05);">
+            <span style="font-size:10px;text-transform:uppercase;color:#38bdf8;font-weight:bold;letter-spacing:1px;">Welcome to my world</span>
+            <h1 style="margin:2px 0;font-size:18px;font-weight:bold;color:#fff;">Every journey starts somewhere.</h1>
+            <p style="margin:0 0 10px 0;color:#94a3b8; font-size:11px;">Two passions. New challenges. One journey.</p>
+            <button onclick="exploreMyWorldIntro()" style="background:#0284c7;color:white;border:none;padding:6px 12px;border-radius:4px;font-weight:bold;cursor:pointer;font-size:11px;display:flex;align-items:center;gap:6px;">Explore my world</button>
         </div>
-        //chose between the fencing or climbing buttom
-        <h3 style="margin-bottom:12px;fint-size:14px; font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;">Choose your path</h3>
-        <div style="display:flex;gap:16px">
-            
+        <!--chose between the fencing or climbing buttom-->
+        <h3 style="margin-bottom:8px;fint-size:12px; font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;">Choose your path</h3>
+        <div style="display:flex;gap:12px;margin-bottom:12px;">
+            <!--fencing-->
+            <div onclick="openSportSelection('fencing')" style="flex:1;background:rgba(30,41,59,0.3);border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,0.05);transition:transform 0.2s;">
+                <img src="./images/fencing.webp" style="width:100%;height:120px;object-fit:cover;object-position:center;display:block;onerror="this.src='./images/myfoto.PNG'">
+                <div style="padding:8px;background:rgba(15,23,42,0.6);font-size:11px;font-weight:bold;">01 / Fencing</div>
+            </div>
+            <!--climbing-->
+            <div onclick="openSportSelection('climbing')" style="flex:1;background:rgba(30,41,59,0.3);border-radius:12px;overflow:hidden;cursor:pointer;border: 1px solid rgba(255,255,255,0.05);transition:transform 0.2s;">
+                <img src="./images/climbing.jpg" style="width:100%;height:160px;object-fit:cover;display:block;onerror="this.src='./images/myfoto.PNG'">
+                <div style="padding:12px;background:rgba(15,23,42,0.6);font-size:11px;font-weight:bold;">02 / Climbing</div>
+            </div>
         </div>
+        <div onclick="openGlobalWheelSection()" style="background: linear-gradient(135deg, rgba(250,128,114,0.15), rgba(0,255,150,0.08)); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: transform 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.15); margin-bottom:10px; box-sizing:border-box;">
+            <div>
+                <h4 style="margin: 0; color: #fff; font-size: 14px; font-weight: bold;">🎡 Still Indecisive? Try The Lucky Wheel!</h4>
+            </div>
+            <div style="font-size: 18px; background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; color: #38bdf8; font-weight:bold; font-size:11px;">PLAY ➔</div>
+        </div>
+
     `;    
+}
+function openSportSelection(sportKey){
+    currentSelectedSport=sportKey;
+    currentPostIndex=0;
+    var sidebar=document.querySelector("#adventureSidebar");
+    var contentArea=document.querySelector("#adventureContent");
+    if(!sidebar || !contentArea) return;
+    sidebar.style.display="flex";
+    contentArea.innerHTML="";
+    sidebar.innerHTML=`
+        <div style="font-size:11px;text-transform:uppercase;color:#94a3b8;font-weight:bold;margin-bottom:5px;padding-left:5px;">Path Selected</div>
+        <div style="font-size:14px;font-weight:bold;color:salmon;margin-bottom:15px;padding-left:5px;">${adventureContentData[sportKey].title}</div>
+        <div onclick="loadSubSelection('goals')" class="sidebar-tab" id="tab-goals" style="padding:10px;margin-bottom:6px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:bold;color:#fff;">📊Goals and Progress</div>
+        <div onclick="loadSubSelection('about')" class="sidebar-tab" id ="tab-about" style="padding:10px; margin-bottom:6px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:bold;color:#fff;">About Me</div>
+        <hr style="border:0;border-top:1px solid rgba(255,255,255,0.1);margin:10px 0;">
+        <div onclick="showAdventureWelcomePage()" style="padding:8px;text-align:center;background:rgba(255,255,255,0.05);border-radius:6px;cursor:pointer;font-size:11px;font-weight:bold;color:#38bdf8;">⬅Back to Menu</div>
+    `;
+    loadSubSelection("goals");
+}
+function loadSubSelection(selectionKey){
+    var contentArea=document.querySelector("#adventureContent");
+    var sportData=adventureContentData[currentSelectedSport];
+    if(!contentArea || !sportData)return;
+    var allTabs=document.querySelectorAll("#adventureSidebar .sidebar-tab");
+    allTabs.forEach(function(tab){
+        if(tab.id==="tab-" + selectionKey){
+            tab.classList.add("active-tab");
+        }else{
+            tab.classList.remove("active-tab");
+        }
+    });
+    if(selectionKey==="intro"){
+        contentArea.innerHTML=`
+            <h2 style="margin-top:0;color:salmon;font-size:20px;">Welcome to ${sportData.title}</h2>
+            <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);padding:16px;border-radius:12px;margin-top:15px;">
+                <p style="font-size:14px;line-height:1.6;color:#e2e8f0;margin-top:0;">
+                    ${sportData.bannerText}. This is my space, dedicated to showcase my love for climbing and fencing but also somewhere where I show my evolution.
+                </p>
+                <p style="font-size:13px;line-height:1.6;color:#94a3b8;margin-bottom:0;">
+                    After choosing a sport and clicking on it use the lateral bar to nevigate threw my goals, my treining specificitys and a little wheel game.
+                </p>
+            </div>
+        `;
+    }
+    if(selectionKey==="goals"){
+        var goalsHTML=`
+            <h2 style="margin-top:0;color:salmon;font-size:20px;">📊${sportData.title} - Goals & Progress</h2>
+            <p style="color:#94a3b8;font-size:13px;margin-bottom:20px;">Following my technique progress,mental focus and goals in fencing.</p>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+        `;
+        sportData.goals.forEach(function(goal){
+            goalsHTML +=`
+                <div style="backgrond:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);padding:12px;border-radius:8px;">
+                    <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:bold;margin-bottom:6px;">
+                        <span>🎯${goal.name}</span>
+                        <span style="color:#00ff96;">${goal.progress}%</span>
+                    </div>
+                    <div class="progress-bg" style="background:rgba(255,255,255,0.1);border-radius:10px;width:100%;height:8px;overflow:hidden;margin-top:4px;">
+                        <div class="progress-fill" style="width: ${goal.progress}%;background:linear-gradient(90deg,salmon,#00ff96);height:100%;border-radius:10px;"></div>
+                    </div>
+                </div> 
+            `;      
+        });
+        goalsHTML +=`</div>`;
+        contentArea.innerHTML=goalsHTML;
+    }else if (selectionKey==="about"){
+        var currentPost=sportData.aboutPosts[currentPostIndex];
+        contentArea.innerHTML=`
+            <h2 style="margin-top:0;color:salmon;font-size:20px;">About Me - ${sportData.title}</h2>
+            <div style="background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;min-height:180px;display:dlex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 32px rgba(0,0,0,0.3);position:relative;margin-bottom:20px;">
+                <div>
+                    <span style="font-size:11px;color:salmon;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">Post ${currentPostIndex +1} of ${sportData.aboutPosts.length}</span>
+                    <h3 style="margin:8px 0;font-size:18px;color:#fff;">${currentPost.title}</h3>
+                    <p style="margin:0;color:#cbd5e1;font-size:13px;line-height:1.6;">${currentPost.text}</p>
+                </div>
+                <div style="margin-top:15px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.05);">
+                    <img src="./images/${currentSelectedSport}.jpg" style="width: 100%; height: 140px; object-fit: cover;" onerror="this.src='./images/myfoto.PNG'">
+                </div>
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                <button onclick="rotatePost(-1)" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px;">◀ Prev Poster</button>
+                <button onclick="rotatePost(1)" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px;">Next Poster ▶</button>
+            </div>
+        `;
+    }else if (selectionKey==="wheel"){
+        contentArea.innerHTML=`
+            <h2 style="margin-top:0;color:salmon;font-size:20px;">🎡Find Your Adventure</h2>
+            <p style="coloe:#94a3b8;">(Ready to spin the Wheel)</p>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; position: relative; margin-top: 5px;">
+                <div style="position: relative; width: 200px; height: 210px;">
+                    <div class="wheel-pointer"></div>
+                    <div id="luckyWheel" class="wheel-container">
+                        <span style="position: absolute; top: 40%; left: 10%; font-weight: bold; font-size: 12px; color: #1e293b; transform: rotate(-90deg);">FENCING</span>
+                        <span style="position: absolute; top: 40%; right: 10%; font-weight: bold; font-size: 12px; color: #1e293b; transform: rotate(90deg);">CLIMBING</span>
+                    </div>
+                    <button onclick="spinTheWheel()" class="wheel-center-btn">SPIN</button>
+                </div>
+                <div id="wheelResultCard" style="display: none; background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; width: 100%; box-sizing: border-box; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: all 0.3s;">
+                    <div id="wheelTextSlot" style="font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 12px;"></div>
+                    <button id="findAdventureBtn" style="background: #0284c7; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; transition: 0.2s;">
+                        Find your adventure ↗
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+}
+function rotatePost(direction){
+    var sportData= adventureContentData[currentSelectedSport];
+    if(!sportData)return;
+    currentPostIndex+= direction;
+    if(currentPostIndex>= sportData.aboutPosts.length){
+        currentPostIndex=0;
+    }
+    if(currentPostIndex<0){
+        currentPostIndex=sportData.aboutPosts.length -1;
+    }
+    loadSubSelection("about");
+}
+dragElement(document.getElementById("adventureApp"));
+function exploreMyWorldIntro(){
+    var sidebar=document.querySelector("#adventureSidebar");
+    var contentArea=document.querySelector("#adventureContent");
+    if(!sidebar || !contentArea) return;
+    sidebar.style.display="none";
+    contentArea.innerHTML=`
+        <h2 style="margin-top:0;color:salmon;font-size:20px;">Welcome to My Active World</h2>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);padding:18px;border-radius:12px;margin-top:15px;">
+            <p style="font-size:14px;line-height:1.6;color:#e2e8f0;margin-top:0;">
+                Beyond my fascination whit technology and robotics, I find balance and inner peace in my life trought sports.Fencing and climbing shape my discipline,agility, and resilience every day but especially it brings joy to my every day routine.
+            </p>
+            <p style="font-size:13px;line-height:1.6;color:#94a3b8;">
+                This is my small world in motion while fencing teaches me focus, climbing challenges me to overcome my fears.
+            </p>
+            <hr style="border:0;border-top:1px solid rgba(255,255,255,0.1);margin:15px 0;">
+            <button onclick="showAdventureWelcomePage()" style="background:rgba(255,255,255,0.2);color:#38bdf8;border:1px solid rgba(255,255,255,0.1);padding:6px 12px;border-radius:4px;font-weight:bold;cursor:pointer;font-size:11px;">
+                ⬅ Back to Menu
+            </button>
+        </div>
+    `;
+}
+var currentWheelRotation=0;
+function spinTheWheel(){
+    var wheel=document.getElementById("luckyWheel");
+    var resultCard=document.getElementById("wheelResultCard");
+    var textSlot=document.getElementById("wheelTextSlot");
+    var actionBtn=document.getElementById("findAdventureBtn");
+    if (!wheel || !resultCard || !textSlot || !actionBtn) return;
+    resultCard.style.display="none";
+    var extraDegrees=Math.floor(Math.random()*360);
+    currentWheelRotation+=1800+extraDegrees;
+    wheel.style.transform=`rotate(${currentWheelRotation}deg)`;
+    var normalizeAngle=(currentWheelRotation%360);
+    var winningSport="fencing";
+    if(normalizeAngle>=90 && normalizeAngle<270){
+        winningSport="climbing";
+    }else{
+        winningSport="fencing";
+    }
+    setTimeout(function(){
+        resultCard.style.display="block";
+        textSlot.innerHTML`<p style="margin:0;font-weight:bold;color:#00ff96;">The wheel stoped!! Your sport is waiting for you...</p>`;
+        actionBtn.onclick=function(){
+            var selectedData=adventureContentData[winningSport];
+            textSlot.innerHTML=selectedData.wheelResults || selectedData.wheelResults;
+        };
+    },3000);
+}
+function openGloalWheelSelection(){
+    var sidebar=document.querySelector("#adventureDidebar");
+    var contentArea=document.querySelector("#adventureContent");
+    if(!contentArea)return;
+    if(sidebar)sidebar.style.display="none";
+    contentArea.innerHTML= `
+        <h2 style="margin-top:0; color:salmon; font-size:20px;">🎡 Find Your Adventure</h2>
+        <p style="color:#94a3b8; font-size:13px; margin-bottom:20px;">Undecided about what sport you want to look at first, try clickingthe bottom below to see what may be you future sport. </p>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; margin-top: 10px;">
+            <div style="position: relative; width: 260px; height: 270px;">
+                <div class="wheel-pointer"></div>
+                <div id="luckyWheel" class="wheel-container">
+                    <span style="position: absolute; top: 44%; left: 8%; font-weight: bold; font-size: 13px; color: #1e293b; transform: rotate(-90deg); letter-spacing: 1px;">CLIMBING</span>
+                    <span style="position: absolute; top: 44%; right: 8%; font-weight: bold; font-size: 13px; color: #1e293b; transform: rotate(90deg); letter-spacing: 1px;">FENCING</span>
+                </div>
+                <button onclick="spinTheWheel()" class="wheel-center-btn">SPIN</button>
+            </div>
+            <div id="wheelResultCard" style="display: none; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 16px; width: 100%; box-sizing: border-box; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                <div id="wheelTextSlot" style="font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 12px;"></div>
+                <button id="findAdventureBtn" style="background: #0284c7; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px;">
+                    Find your adventure ↗
+                </button>
+            </div>
+            <button onclick="showAdventureWelcomePage()" style="background: rgba(255,255,255,0.08); color: #38bdf8; border: 1px solid rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 11px; margin-top: 5px;">
+                ⬅ Back to Menu
+            </button>
+        </div>
+    </div>
+    `;
 }

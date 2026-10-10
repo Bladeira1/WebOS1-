@@ -41,18 +41,23 @@
             <span class="closebutton" id="roboticsclose">❌</span>
             <span>Tech Lab 🤖</span>
         </div>
-        
-        <!-- Este contentor organiza a barra lateral à esquerda e o texto à direita -->
         <div style="margin-top:12px; height:calc(100% - 40px); display:flex; gap:20px; box-sizing:border-box; overflow:hidden;">
-            
-            <!-- Barra Lateral Onde os teus 4 projetos vão aparecer dinamicamente -->
             <div id="roboticsSidebar" style="width: 180px; min-width: 180px; display:flex; flex-direction:column; gap:10px; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 12px; overflow-y: auto; height: 100%;">
-                <!-- O JavaScript vai injetar os botões aqui automaticamente -->
             </div>
-
-            <!-- Área de Conteúdo Principal onde os textos dos teus sonhos e imagens vão carregar -->
             <div id="roboticsContent" style="flex-grow:1; overflow-y:auto; padding-right: 8px; height: 100%; font-size:14px; line-height: 1.6; word-break: break-word;">
-                <!-- O Conteúdo dinâmico entra aqui -->
+            </div>
+        </div>
+    </div>
+    <!--inside the advenced app screen-->
+    <div id="adventureApp" class="window" style="display:none;">
+        <div class="windowheader" id="adventureheader">
+            <span class="closebutton" id="adventureclose">❌</span>
+            <span>Adventure Hub🤺</span>
+        </div>
+        <div style="margin-top:12px;height:calc(100% - 40px);display:flex;gap:20px;box-sizing:border-box;overflow:hidden;">
+            <div id="adventureSidebar" style="width:180px;min-width:180px;display:flex;flex-direction:column;gap:10px;border-right:1px solid rgba(255,255,255,0.1);padding-right:12px;overflow-y:auto;height:100%;">
+            </div>
+            <div id="adventureContent" style="flex-grow:1;overflow-y:auto;padding-right:8px;height:100%;max-height:calc(100% - 10px);font-size:14px;line-height:1.6;word-break:break-word;box-sizing:border-box;">
             </div>
         </div>
     </div>
@@ -72,9 +77,15 @@
 
     <!-- app desktop icons -->
     <div id="desktopApps" style="padding-top:64px; padding-left:16px;">
+        <!--1app-->
         <div onclick="handleIconTap(this)" style="text-align:center; padding:12px; width:fit-content; border:2px solid rgba(255,255,255,0.2); border-radius:12px; background: rgba(0,0,0,0.2); backdrop-filter:blur(2px);">
             <img src="./images/app_icon.png" style="width:64px; height:64px; font-size:45px; display:block; filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.8));">
             <p style="margin:5px 0 0 0; font-size:13px; font-weight:bold; color:white;">Tech_Lab</p>
+        </div>
+        <!--advanced app-->
+        <div onclick="handleAdventureIconTap(this)" style="text-align:center;padding:12px;width:fit-content;border:2px solid rgba(255,255,255,0.2);border-radius:12px;background:rgba(0,0,0,0.2);backdrop-filter:blur(2px);">
+            <img src="./images/app_icon2.png" style="width:64px;height:64px;display:block;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.8));">
+            <p style="margin:5px 0 0;font-size:13px;font-weight:bold;color:white;">Adventure Hub</p>
         </div>
     </div>
 
