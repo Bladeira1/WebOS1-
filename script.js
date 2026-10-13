@@ -571,3 +571,44 @@ function loadAdventureRoadmap(sportKey){
     `;
     contentArea.innerHTML=roadmapHTML;
 }
+const musicPlaylist=[
+    {
+        title:"Dancing in the sky",
+        artist:"Zita",
+        src:"https://soundhelix.com",
+    },
+    {
+        title:"Vibes",
+        artists:"BrunaOS Beats",
+        src:"https://soundhelix.com",
+    },
+    {
+        title:"background music",
+        artists:"...",
+        src:"https://soundhelix.com",
+    }
+];
+let currentTrackIndex=0;
+let isPlaying=false;
+const audioPlayer=document.getElementById("audioPlayer");
+const vinylRecord=document.getElementById("vinylRecord");
+const vinylLabel=document.getElementById("vinylLabel");
+const vinylArm=document.getElementById("vinylArm");
+const playPauseBtn=document.getElementById("playPauseBtn");
+const trackTitle=document.getElementById("trackTitle");
+const trackArtist=document.getElementById("trackArtist");
+const progressSlider=document.getElementById("progressSlider");
+const currentTimeLabel=document.getElementById("currentTime");
+const totalDurationLabel=document.getElementById("totalDuration");
+function handleMusicIconTap(element){
+    const musicWin=document.getElementById("musicApp");
+    musicWin.style.display="block";
+    if(typeof focusWindow==="function"){
+        focusWindow(musicWin);
+    }else{
+        musicWin.style.zIndex="100";
+    }
+    if(audioPlayer.src==="" || audioPlayer.src===window.location.href){
+        loadTrack(currentTrackIndex);
+    }
+}
