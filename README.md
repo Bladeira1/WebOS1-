@@ -13,13 +13,13 @@ If you have trouble and can't listen to the music or use some of the features be
 3. Right click the index editor and select open with live server and your browser will immediatly open and map the system.
 
 # Core applications
-### -Tech Lab: A robotics explorer of my dreams projects.
-### -Adventure Hub: Expirience one of my two favourite sports on heart.
-### -Music Hub: Listen to some musics while injoying your experience on my web.
+* **Tech Lab: A robotics explorer of my dreams projects.
+* **Adventure Hub: Expirience one of my two favourite sports on heart.
+* **Music Hub: Listen to some musics while injoying your experience on my web.
 
 # Integrated system micro-features:
-### -The lucky Wheel simulator: choose your own path and chose what sport to start exploring.
-### -Moving vinyl
+* **The lucky Wheel simulator: choose your own path and chose what sport to start exploring.
+* **Moving vinyl
 
 # Resource credits & learning acknoledgements
 Thank you so much for all this free learning sources that are online.
