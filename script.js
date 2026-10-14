@@ -302,7 +302,7 @@ function showAdventureWelcomePage(){
             <button onclick="exploreMyWorldIntro()" style="background:#0284c7;color:white;border:none;padding:6px 12px;border-radius:4px;font-weight:bold;cursor:pointer;font-size:11px;display:flex;align-items:center;gap:6px;">Explore my world</button>
         </div>
         <!--chose between the fencing or climbing buttom-->
-        <h3 style="margin-bottom:8px;fint-size:12px; font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;">Choose your path</h3>
+        <h3 style="margin-bottom:8px;font-size:12px; font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;">Choose your path</h3>
         <div style="display:flex;gap:12px;margin-bottom:12px;">
             <!--fencing-->
             <div onclick="openSportSelection('fencing')" style="flex:1;background:rgba(30,41,59,0.3);border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,0.05);transition:transform 0.2s;">
@@ -496,7 +496,7 @@ function openGlobalWheelSection(){
     if(sidebar)sidebar.style.display="none";
     contentArea.innerHTML= `
         <h2 style="margin-top:0; color:salmon; font-size:20px;">🎡 Find Your Adventure</h2>
-        <p style="color:#94a3b8; font-size:13px; margin-bottom:20px;">Undecided about what sport you want to look at first, try clickingthe bottom below to see what may be you future sport. </p>
+        <p style="color:#94a3b8; font-size:13px; margin-bottom:20px;">Undecided about what sport you want to look at first, try clicking the bottom below to see what may be you future sport. </p>
         <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; position: relative; margin-top: 10px;">
             <div style="position: relative; width: 260px; height: 270px;">
                 <div class="wheel-pointer"></div>
@@ -575,12 +575,12 @@ const musicPlaylist=[
     {
         title:"background music",
         artist:"BrunaOS Beats",
-        src:"./images/background_music.mp3",
+        src:"images/background_music.mp3",
     },
     {
         title:"Vibes",
         artist:"BrunaOS Beats",
-        src:"./images/vibes.mp3",
+        src:"images/vibes.mp3",
     }
 ];
 let currentTrackIndex=0;
@@ -647,6 +647,12 @@ audioPlayer.addEventListener("playing",()=>{
     playPauseBtn.textContent="⏸";
     vinylRecord.style.animationPlayState="running";
     vinylArm.style.transform="rotate(30deg)";
+});
+audioPlayer.addEventListener("pause",()=>{
+    isPlaying=false;
+    playPauseBtn.textContent="▶";
+    vinylRecord.style.animationPlayState="paused";
+    vinylArm.style.transform="rotate(0deg)";
 });
 
 audioPlayer.addEventListener("timeupdate",()=>{
