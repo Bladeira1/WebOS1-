@@ -603,9 +603,6 @@ function handleMusicIconTap(element){
     }else{
         musicWin.style.zIndex="100";
     }
-    const track=musicPlaylist[currentTrackIndex];
-    trackTitle.textContent=track.title;
-    trackArtist.textContent=track.artist;
 }
 
 document.getElementById("musicclose").addEventListener("click",()=>{
@@ -621,30 +618,19 @@ function loadTrack(index){
     trackArtist.textContent=track.artist;
     progressSlider.value=0;
     currentTimeLabel.textContent="0:00";
+    audioPlayer.load();
 }
 function togglePlayPause(){
+    if(!audioPlayer.src || audioPlayer.src===window.location.href){
+        loadTrack(currentTrackIndex);
+    }
+
     if(isPlaying){
         audioPlayer.pause();
-        isPlaying=false;
-        playPauseBtn.textContent="▶";
-        vinylRecord.style.animationPlayState="paused";
-        vinylArm.style.transform="rotate(0deg)";
     }else{
-        if(!audioPlayer.src || audioPlayer.src===window.location.href){
-            const track=musicPlaylist[currentTrackIndex];
-            audioPlayer.src=track.src;
-        }
-        audioPlayer.play()  
-            .then(()=>{
-                isPlaying=true;
-                playPauseBtn.textContent="⏸";
-                vinylRecord.style.animationPlayState="running";
-                vinylArm.style.transform="rotate(30deg)";               
-            })
-            .catch(err=>{
-                console.error("error trying to play music: ",err);
-                alert("not possible to load music file");
-            });
+        audioPlayer.play().catch(err=>{
+            console.error("error:",err);
+        });
     }
 }
 function changeTrack(direction){
@@ -653,11 +639,16 @@ function changeTrack(direction){
     if (currentTrackIndex<0) currentTrackIndex=musicPlaylist.length-1;
     loadTrack(currentTrackIndex);
     if(isPlaying){
-        audioPlayer.play();
-        vinylRecord.style.animationPlayState="running";
-        vinylArm.style.transform="rotate(30deg)";
+        audioPlayer.play().catch(err=>console.error(err));
     }
 }
+audioPlayer.addEventListener("playing",()=>{
+    isPlaying=true;
+    playPauseBtn.textContent="⏸";
+    vinylRecord.style.animationPlayState="running";
+    vinylArm.style.transform="rotate(30deg)";
+});
+
 audioPlayer.addEventListener("timeupdate",()=>{
     if(audioPlayer.duration){
         const progress=(audioPlayer.currentTime/audioPlayer.duration)*100;
