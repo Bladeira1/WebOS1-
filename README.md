@@ -26,6 +26,10 @@ If you have trouble and can't listen to the music or use some of the features be
 
 # Resource credits & learning acknoledgements
 Thank you so much for all this free learning sources that are online.
-### Youtube Videos: 
+### Youtube Videos:
+- Rotation animation:https://www.youtube.com/watch?v=z2LQYsZhsFw
+- Make a music player:https://www.youtube.com/watch?v=JtrFzoL1joI
+- Understand better the draggable dinamic:https://www.youtube.com/watch?v=OWARn8lQbVE AND https://www.youtube.com/watch?v=OR8rAP_fBew
+
 ### Stardance guides: 
 Thank you so much stardance for leading us in our projects and handing us some guides. And huge thanks to all the people on the help channels that help whenwever we need help.
