@@ -4,7 +4,7 @@ This is my very own OS that can be run in the web!
 It is interactive and represents a portfolio workspace focused on robotics diaries, and my competitive athletic side, whith also some aditional creatice features.
 <img width="1920" height="889" alt="webOS_cover_oage" src="https://github.com/user-attachments/assets/f5cf0df5-abdf-495a-9649-cdae64a5e159" />
 
-Try it by yourself and expercience a little bit of my life: (https://github.com/Bladeira1/WebOS1-.git)
+Try it by yourself and expercience a little bit of my life: https://bladeira1.github.io/WebOS1-/
 
 # How to run it 
 If you have trouble and can't listen to the music or use some of the features because some browsers block raw media steams try running it locally:
