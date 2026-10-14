@@ -573,19 +573,14 @@ function loadAdventureRoadmap(sportKey){
 }
 const musicPlaylist=[
     {
-        title:"Dancing in the sky",
-        artist:"Zita",
-        src:"https://soundhelix.com",
+        title:"background music",
+        artist:"BrunaOS Beats",
+        src:"./images/background_music.mp3",
     },
     {
         title:"Vibes",
-        artists:"BrunaOS Beats",
-        src:"https://soundhelix.com",
-    },
-    {
-        title:"background music",
-        artists:"...",
-        src:"https://soundhelix.com",
+        artist:"BrunaOS Beats",
+        src:"./images/vibes.mp3",
     }
 ];
 let currentTrackIndex=0;
@@ -608,7 +603,81 @@ function handleMusicIconTap(element){
     }else{
         musicWin.style.zIndex="100";
     }
-    if(audioPlayer.src==="" || audioPlayer.src===window.location.href){
-        loadTrack(currentTrackIndex);
+    const track=musicPlaylist[currentTrackIndex];
+    trackTitle.textContent=track.title;
+    trackArtist.textContent=track.artist;
+}
+
+document.getElementById("musicclose").addEventListener("click",()=>{
+    document.getElementById("musicApp").style.display="none";
+});
+if(typeof dragElement==="function"){
+    dragElement(document.getElementById("musicApp"));
+}
+function loadTrack(index){
+    const track=musicPlaylist[index];
+    audioPlayer.src=track.src;
+    trackTitle.textContent=track.title;
+    trackArtist.textContent=track.artist;
+    progressSlider.value=0;
+    currentTimeLabel.textContent="0:00";
+}
+function togglePlayPause(){
+    if(isPlaying){
+        audioPlayer.pause();
+        isPlaying=false;
+        playPauseBtn.textContent="▶";
+        vinylRecord.style.animationPlayState="paused";
+        vinylArm.style.transform="rotate(0deg)";
+    }else{
+        if(!audioPlayer.src || audioPlayer.src===window.location.href){
+            const track=musicPlaylist[currentTrackIndex];
+            audioPlayer.src=track.src;
+        }
+        audioPlayer.play()  
+            .then(()=>{
+                isPlaying=true;
+                playPauseBtn.textContent="⏸";
+                vinylRecord.style.animationPlayState="running";
+                vinylArm.style.transform="rotate(30deg)";               
+            })
+            .catch(err=>{
+                console.error("error trying to play music: ",err);
+                alert("not possible to load music file");
+            });
     }
+}
+function changeTrack(direction){
+    currentTrackIndex+= direction;
+    if(currentTrackIndex>=musicPlaylist.length) currentTrackIndex=0;
+    if (currentTrackIndex<0) currentTrackIndex=musicPlaylist.length-1;
+    loadTrack(currentTrackIndex);
+    if(isPlaying){
+        audioPlayer.play();
+        vinylRecord.style.animationPlayState="running";
+        vinylArm.style.transform="rotate(30deg)";
+    }
+}
+audioPlayer.addEventListener("timeupdate",()=>{
+    if(audioPlayer.duration){
+        const progress=(audioPlayer.currentTime/audioPlayer.duration)*100;
+        progressSlider.value=progress;
+        currentTimeLabel.textContent=formatTime(audioPlayer.currentTime);
+    }
+});
+audioPlayer.addEventListener("loadedmetadata",()=>{
+    totalDurationLabel.textContent=formatTime(audioPlayer.duration);
+});
+audioPlayer.addEventListener("ended",()=>{
+    changeTrack(1);
+});
+progressSlider.addEventListener("input",()=>{
+    const seekTime=(progressSlider.value/100)*audioPlayer.duration;
+    audioPlayer.currentTime=seekTime;
+});
+function formatTime(seconds){
+    if(isNaN(seconds)) return"0:00";
+    const mins=Math.floor(seconds/60);
+    const secs=Math.floor(seconds%60);
+    return`${mins}:${secs<10? '0':''}${secs}`;
 }

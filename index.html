@@ -71,7 +71,7 @@
         <div style="margin-top:15px;display:flex;flex-direction:column;align-items:center;gap:12px;box-sizing:border-box;">
             <div style="background:#2a1b15;border:4px solid #1a0f0a;border-radius:12px;padding:20px;width:100%;box-sizing:border-box;display:flex;justify-content:center;align-items:center;position:relative;box-shadow: inset 0 0 20px rgba(0,0,0,0.8);">
                 <div id="vinylRecord" class="vinyl-disc">
-                    <div id="vinylLabel" class="vinyl-center-label">🎵</div>
+                    <div id="vinylLabel" class="vinyl-center-label"></div>
                 </div>
                 <div id="vinylArm" class="turntable-arm"></div>
             </div>
@@ -86,6 +86,7 @@
             </div>
             <div style="display:flex;align-items:center;gap:20px;margin-top:5px;">
                 <button onclick="changeTrack(-1)" class="music-btn">⏮</button>
+                <button onclick="togglePlayPause()" id="playPauseBtn" class="music-btn-main">▶</button>
                 <button onclick="changeTrack(1)" class="music-btn">⏭</button>
             </div>
         </div>
