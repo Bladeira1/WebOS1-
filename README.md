@@ -1,9 +1,9 @@
+
 # BrunaOs
 This is my very own OS that can be run in the web!
 It is interactive and represents a portfolio workspace focused on robotics diaries, and my competitive athletic side, whith also some aditional creatice features.
-<div align="center">
-    <img src="./readme_images/webOS_cover_page.PNG" alt="BrunaOS Main Workspace" width="100%" max-width="800px" style="border-radius:12px;border:1px solid rgba(255,255,255,0.1);"/>
-</div>
+<img width="1920" height="889" alt="webOS_cover_oage" src="https://github.com/user-attachments/assets/f5cf0df5-abdf-495a-9649-cdae64a5e159" />
+
 Try it by yourself and expercience a little bit of my life: (https://github.com/Bladeira1/WebOS1-.git)
 
 # How to run it 
@@ -22,9 +22,7 @@ If you have trouble and can't listen to the music or use some of the features be
 * Moving vinyl
 
 # Some sketches for app designs
-<div align="center">
-    <img src="./readme_images/myadvancedappsketch.PNG" alt="Sports App" width="100%" max-width="800px" style="border-radius:12px;border:1px solid rgba(255,255,255,0.1);"/>
-</div>
+<img width="2048" height="1536" alt="myadvancedappsketch" src="https://github.com/user-attachments/assets/13b0d6d3-a2a4-4c1d-84ef-2918d95820ad" />
 
 # Resource credits & learning acknoledgements
 Thank you so much for all this free learning sources that are online.
